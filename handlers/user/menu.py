@@ -9,13 +9,14 @@ delivery_status = '🚚 Статус заказа'
 settings = '⚙️ Настройка каталога'
 orders = '🚚 Заказы'
 questions = '❓ Вопросы'
+usermode = 'Режим пользователя'
 
 
 @dp.message_handler(IsAdmin(), commands='menu')
 async def admin_menu(message: Message):
     markup = ReplyKeyboardMarkup(selective=True)
     markup.add(settings)
-    markup.add(questions, orders)
+    markup.add(questions, orders, usermode)
 
     await message.answer('Меню', reply_markup=markup)
 

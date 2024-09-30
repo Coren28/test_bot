@@ -18,7 +18,7 @@ admin_message = 'Админ'
 async def cmd_start(message: types.Message):
     markup = ReplyKeyboardMarkup(resize_keyboard=True)
 
-    markup.row(user_message, admin_message)
+    #markup.row(user_message, admin_message)
 
     await message.answer('''Привет! 👋
 
@@ -32,17 +32,17 @@ async def cmd_start(message: types.Message):
     ''', reply_markup=markup)
 
 
-@dp.message_handler(text=admin_message)
-async def admin_mode(message: types.Message):
-    cid = message.chat.id
-    if cid not in ADMINS:
-        ADMINS.append(cid)
+#@dp.message_handler(text=admin_message)
+#async def admin_mode(message: types.Message):
+   # cid = message.chat.id
+    #if cid not in ADMINS:
+    #    ADMINS.append(cid)
 
-    await message.answer('Включен админский режим.',
-                         reply_markup=ReplyKeyboardRemove())
+   # await message.answer('Включен админский режим.',
+    #                     reply_markup=ReplyKeyboardRemove())
 
 
-@dp.message_handler(text=user_message)
+#@dp.message_handler(text=user_message)
 async def user_mode(message: types.Message):
     cid = message.chat.id
     if cid in ADMINS:
@@ -60,6 +60,6 @@ async def on_startup(dp):
 if __name__ == '__main__':
     executor.start_polling(dp, on_startup=on_startup, skip_updates=False)
 
-#нужно настроить различие админа и юзера по тг
+#нужно настроить выбор режима для админа с помощью доп кнопки в админ панели перейти в режим юзера
 #заменить номер заказа на более короткий
-#поставить бота на сервер
+#настроить смартгит
