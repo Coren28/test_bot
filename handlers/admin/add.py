@@ -19,7 +19,6 @@ from keyboards.default.markups import *
 category_cb = CallbackData('category', 'id', 'action')
 product_cb = CallbackData('product', 'id', 'action')
 
-
 delete_category = '🗑️ Удалить категорию'
 add_product = '➕ Добавить товар'
 
@@ -40,6 +39,7 @@ async def process_settings(message: Message):
     await message.answer('Настройка категорий:', reply_markup=markup)
 
 
+
 @dp.callback_query_handler(IsAdmin(), text='add_category')
 async def add_category_callback_handler(query: CallbackQuery):
     await query.message.delete()
@@ -57,7 +57,7 @@ async def set_category_title_handler(message: Message, state: FSMContext):
     await state.finish()
     await process_settings(message)
 
-
+#стоит фильтр позволяющий только админу проводить настройку----------------------------------
 @dp.callback_query_handler(IsAdmin(), category_cb.filter(action='view'))
 async def category_callback_handler(query: CallbackQuery, callback_data: dict,
                                     state: FSMContext):
@@ -72,6 +72,7 @@ async def category_callback_handler(query: CallbackQuery, callback_data: dict,
     await state.update_data(category_index=category_idx)
     await show_products(query.message, products, category_idx)
 
+#---------------------------------------------------------------------------------------------
 
 async def show_products(m, products, category_idx):
     await bot.send_chat_action(m.chat.id, ChatActions.TYPING)
