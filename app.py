@@ -59,6 +59,7 @@ async def on_startup(dp):
 
 if __name__ == '__main__':
     executor.start_polling(dp, on_startup=on_startup, skip_updates=False)
+    app.run(debug = True, host = '0.0.0.0', port = 9000 )
 
 #нужно настроить выбор режима для админа с помощью доп кнопки в админ панели перейти в режим юзера
 #заменить номер заказа на более короткий
